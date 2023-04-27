@@ -4,6 +4,7 @@ import plotly_express as px
 
 app = Flask(__name__)
 
+
 @app.route("/", methods=["GET", "POST"])
 def weather():
     if request.method == "POST":
@@ -33,9 +34,7 @@ def weather():
                 forecast_data[date] = sky_condition.lower()
             print(forecast_data.items())
             return render_template(
-                "weather.html",
-                forecasttype=forecasttype,
-                forecast_data=forecast_data
+                "weather.html", forecasttype=forecasttype, forecast_data=forecast_data
             )
     return render_template("weather.html")
 
