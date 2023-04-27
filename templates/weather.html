@@ -36,10 +36,26 @@
                 </select>
             </div>
             <button class="btn btn-secondary mb-4" type="submit">Submit</button>
-        </form>
+            {% if forecasttype == "temperature" %}
+            <div id="graph"></div>
+            {% elif forecasttype == "sky" %}
+            {% for date, sky_condition in forecast_data.items() %}
+            {% if loop.index0 % 3 == 0 %}
+            <div class="row">
+                {% endif %}
+                <div class="sky-condition col">
+                    <img src="{{ url_for('static', filename=sky_condition ~ '.png') }}" style="width: 200px;">
+                    <p>{{ date }}</p>
+                </div>
+                {% if loop.index % 3 == 0 or loop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <p>No forecast type selected</p>
+            {% endif %}
     </div>
-
-    <div id="graph"></div>
+    </form>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script>
