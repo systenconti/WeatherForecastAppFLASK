@@ -22,7 +22,10 @@ def weather():
             )
             graph_json = figure.to_json()
             return render_template(
-                "weather.html", forecasttype=forecasttype, graph_json=graph_json
+                "weather.html",
+                forecasttype=forecasttype,
+                graph_json=graph_json,
+                city=city,
             )
 
         elif forecasttype == "sky":
@@ -34,7 +37,10 @@ def weather():
                 forecast_data[date] = sky_condition.lower()
             print(forecast_data.items())
             return render_template(
-                "weather.html", forecasttype=forecasttype, forecast_data=forecast_data
+                "weather.html",
+                forecasttype=forecasttype,
+                forecast_data=forecast_data,
+                city=city,
             )
     return render_template("weather.html")
 
